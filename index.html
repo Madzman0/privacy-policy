@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy - Msika Wanjala</title>
   <style>
-    /* Global Styles */
+    /* === CSS Variables for Theme === */
     :root {
       --bg-light: #f4f6f8;
       --bg-dark: #121212;
@@ -15,43 +15,97 @@
       --text-dark: #eee;
       --primary: #007BFF;
       --accent: linear-gradient(45deg, #6a00f4, #00d4ff);
+      --logo2-light: #006400; /* dark green */
+      --logo2-dark: #ffffff; /* white */
     }
 
+    /* === Body and Global Styles === */
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.7;
       margin: 0;
       padding: 0;
-      transition: background-color 0.3s, color 0.3s;
+      transition: background-color 0.5s, color 0.5s;
+      overflow-x: hidden;
     }
 
-    /* Logo in corner */
-    #app-logo {
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    body.light-mode {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    /* === Animated Crossing Lines Background === */
+    body::before {
+      content: '';
       position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 0;
+      pointer-events: none;
+      transition: background-image 0.5s;
+    }
+    body.dark-mode::before {
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(-45deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    }
+
+    /* === Container === */
+    .container {
+      position: relative;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 50px 40px 40px 40px;
+      border-radius: 16px;
+      background-color: var(--card-light);
+      color: var(--text-light);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+      z-index: 1;
+      transition: background-color 0.5s, color 0.5s, box-shadow 0.5s;
+    }
+    body.dark-mode .container {
+      background-color: var(--card-dark);
+      color: var(--text-dark);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+
+    /* === Logo Corner === */
+    .logo-corner {
+      position: absolute;
       top: 20px;
       right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+    .logo-corner img {
       width: 60px;
       height: 60px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    #app-logo:hover {
-      transform: scale(1.1);
+      transition: all 0.5s;
     }
 
-    /* Container */
-    .container {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 30px 40px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    /* Logo2 color overlay */
+    #logo2 {
+      filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    }
+    body.dark-mode #logo2 {
+      filter: brightness(100%) invert(100%);
+    }
+    body.light-mode #logo2 {
+      filter: brightness(0) invert(25%) sepia(88%) saturate(454%) hue-rotate(80deg) brightness(50%) contrast(90%);
     }
 
-    /* Headings */
+    /* === Headings with gradient glow === */
     h1 {
       text-align: center;
       font-size: 2.4em;
@@ -59,78 +113,54 @@
       background: var(--accent);
       -webkit-background-clip: text;
       color: transparent;
+      text-shadow: 0 0 8px rgba(106,0,244,0.4), 0 0 10px rgba(0,212,255,0.3);
     }
-
     h2 {
       font-size: 1.6em;
       margin-top: 30px;
       border-bottom: 2px solid #5553;
       padding-bottom: 6px;
     }
-
     h3 {
       font-size: 1.25em;
       margin-top: 20px;
     }
 
     /* Paragraphs and lists */
-    p {
-      margin: 12px 0;
-      font-size: 1em;
-    }
-    ul {
-      margin: 12px 0 12px 25px;
-    }
-    li {
-      margin-bottom: 8px;
-    }
+    p { margin: 12px 0; font-size: 1em; }
+    ul { margin: 12px 0 12px 25px; }
+    li { margin-bottom: 8px; }
 
-    /* Contact Section */
+    /* Contact section */
     .contact {
       padding: 15px 20px;
       border-left: 4px solid var(--primary);
       margin-top: 20px;
       border-radius: 8px;
       background: rgba(0,123,255,0.05);
+      transition: background 0.5s;
     }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Footer */
-    .footer-note {
-      text-align: center;
-      font-size: 0.85em;
-      margin-top: 40px;
-      color: #777;
-    }
-
-    /* Dark/Light Mode toggle */
-    .dark-mode {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
-    }
-    .dark-mode .container {
-      background-color: var(--card-dark);
-      color: var(--text-dark);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    }
-    .dark-mode .contact {
+    body.dark-mode .contact {
       background: rgba(0,123,255,0.15);
     }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .footer-note { text-align: center; font-size: 0.85em; margin-top: 40px; color: #777; }
+
   </style>
 </head>
-<body>
-  <!-- Logo -->
-  <img id="app-logo" src="logo.png" alt="App Logo">
+<body class="light-mode">
 
   <!-- Container -->
   <div class="container">
+    <!-- Logo Corner -->
+    <div class="logo-corner">
+      <img src="logo.png" alt="Logo 1">
+      <img src="logo2.png" alt="Logo 2" id="logo2">
+    </div>
+
     <h1>Privacy Policy for Msika Wanjala</h1>
     <p><strong>Effective Date:</strong> 15th January 2026</p>
 
@@ -208,18 +238,18 @@
     <p class="footer-note">© 2026 Msika Wanjala. All rights reserved.</p>
   </div>
 
-  <!-- Dark Mode Toggle -->
   <script>
+    // Dark/light mode based on system preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if(prefersDark) {
-      document.body.classList.add('dark-mode');
-    }
+    if(prefersDark) document.body.classList.replace('light-mode','dark-mode');
 
-    // Optional: click logo to toggle mode
-    const logo = document.getElementById('app-logo');
-    logo.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-    });
+    // Click logos to toggle theme
+    const container = document.body;
+    const logos = document.querySelectorAll('#app-logo, #logo2');
+    logos.forEach(l => l.addEventListener('click', () => {
+      container.classList.toggle('dark-mode');
+      container.classList.toggle('light-mode');
+    }));
   </script>
 </body>
 </html>
