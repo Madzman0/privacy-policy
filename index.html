@@ -92,26 +92,32 @@
       transition: all 0.5s;
     }
 
-    /* === Headings with Gradient Glow === */
-    h1 {
-      text-align: center;
-      font-size: 2.4em;
-      margin-bottom: 10px;
-      background: var(--accent);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 8px rgba(106,0,244,0.4), 0 0 10px rgba(0,212,255,0.3);
-    }
-    h2 {
-      font-size: 1.6em;
-      margin-top: 30px;
-      border-bottom: 2px solid #5553;
-      padding-bottom: 6px;
-    }
-    h3 {
-      font-size: 1.25em;
-      margin-top: 20px;
-    }
+    /* === Headings === */
+h1 {
+  text-align: center;
+  font-size: 2.4em;
+  margin-bottom: 10px;
+  color: #000; /* default light mode */
+  text-shadow: 0 0 6px rgba(0,0,0,0.1); /* subtle glow */
+  transition: color 0.5s, text-shadow 0.5s;
+}
+body.dark-mode h1 {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+h2 {
+  font-size: 1.6em;
+  margin-top: 30px;
+  border-bottom: 2px solid #5553;
+  padding-bottom: 6px;
+}
+
+h3 {
+  font-size: 1.25em;
+  margin-top: 20px;
+}
+
 
     /* Paragraphs and lists */
     p { margin: 12px 0; font-size: 1em; }
