@@ -6,91 +6,130 @@
   <title>Privacy Policy - Msika Wanjala</title>
   <style>
     /* Global Styles */
+    :root {
+      --bg-light: #f4f6f8;
+      --bg-dark: #121212;
+      --card-light: #fff;
+      --card-dark: #1e1e1e;
+      --text-light: #333;
+      --text-dark: #eee;
+      --primary: #007BFF;
+      --accent: linear-gradient(45deg, #6a00f4, #00d4ff);
+    }
+
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.7;
       margin: 0;
       padding: 0;
-      background-color: #f4f6f8;
-      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Logo in corner */
+    #app-logo {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    #app-logo:hover {
+      transform: scale(1.1);
     }
 
     /* Container */
     .container {
       max-width: 900px;
-      margin: 40px auto;
+      margin: 60px auto;
       padding: 30px 40px;
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     }
 
     /* Headings */
     h1 {
-      color: #1a1a1a;
       text-align: center;
-      font-size: 2.2em;
+      font-size: 2.4em;
       margin-bottom: 10px;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     h2 {
-      color: #1a1a1a;
-      font-size: 1.5em;
+      font-size: 1.6em;
       margin-top: 30px;
-      border-bottom: 2px solid #e0e0e0;
+      border-bottom: 2px solid #5553;
       padding-bottom: 6px;
     }
 
     h3 {
-      color: #555;
-      font-size: 1.2em;
+      font-size: 1.25em;
       margin-top: 20px;
     }
 
-    /* Paragraphs */
+    /* Paragraphs and lists */
     p {
       margin: 12px 0;
       font-size: 1em;
     }
-
-    /* Lists */
     ul {
       margin: 12px 0 12px 25px;
     }
-
     li {
       margin-bottom: 8px;
     }
 
     /* Contact Section */
     .contact {
-      background-color: #f0f4f8;
       padding: 15px 20px;
-      border-left: 4px solid #007BFF;
+      border-left: 4px solid var(--primary);
       margin-top: 20px;
-      border-radius: 6px;
+      border-radius: 8px;
+      background: rgba(0,123,255,0.05);
     }
 
-    /* Links (if needed) */
     a {
-      color: #007BFF;
+      color: var(--primary);
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
 
-    /* Footer note */
+    /* Footer */
     .footer-note {
       text-align: center;
       font-size: 0.85em;
-      color: #777;
       margin-top: 40px;
+      color: #777;
+    }
+
+    /* Dark/Light Mode toggle */
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .dark-mode .container {
+      background-color: var(--card-dark);
+      color: var(--text-dark);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    .dark-mode .contact {
+      background: rgba(0,123,255,0.15);
     }
   </style>
 </head>
 <body>
+  <!-- Logo -->
+  <img id="app-logo" src="logo.png" alt="App Logo">
+
+  <!-- Container -->
   <div class="container">
     <h1>Privacy Policy for Msika Wanjala</h1>
     <p><strong>Effective Date:</strong> 15th January 2026</p>
@@ -155,7 +194,7 @@
     <p>We use administrative, technical, and physical safeguards such as encryption, role-based access control, and secure cloud infrastructure. No method of transmission or storage is 100% secure.</p>
 
     <h2>7. User Eligibility</h2>
-    <p>This App is intended for individuals who are legally able and prepared to engage in buying and selling activities. Users must meet any applicable age or legal requirements in their jurisdiction. We do not knowingly allow or collect personal information from users who are unable to participate in transactions on the platform.</p>
+    <p>This App is intended for individuals who are legally able and prepared to engage in buying and selling activities. Users must meet any applicable age or legal requirements in their jurisdiction.</p>
 
     <h2>8. Changes to This Privacy Policy</h2>
     <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
@@ -168,5 +207,19 @@
 
     <p class="footer-note">© 2026 Msika Wanjala. All rights reserved.</p>
   </div>
+
+  <!-- Dark Mode Toggle -->
+  <script>
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if(prefersDark) {
+      document.body.classList.add('dark-mode');
+    }
+
+    // Optional: click logo to toggle mode
+    const logo = document.getElementById('app-logo');
+    logo.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
 </body>
 </html>
