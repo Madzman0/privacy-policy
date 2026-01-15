@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy - Msika Wanjala</title>
   <style>
-    /* === CSS Variables for Theme === */
+    /* === Theme Variables === */
     :root {
       --bg-light: #f4f6f8;
       --bg-dark: #121212;
@@ -15,11 +15,9 @@
       --text-dark: #eee;
       --primary: #007BFF;
       --accent: linear-gradient(45deg, #6a00f4, #00d4ff);
-      --logo2-light: #006400; /* dark green */
-      --logo2-dark: #ffffff; /* white */
     }
 
-    /* === Body and Global Styles === */
+    /* === Body & Global Styles === */
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.7;
@@ -29,16 +27,16 @@
       overflow-x: hidden;
     }
 
-    body.dark-mode {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
-    }
     body.light-mode {
       background-color: var(--bg-light);
       color: var(--text-light);
     }
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
 
-    /* === Animated Crossing Lines Background === */
+    /* === Subtle Crossing Lines Background === */
     body::before {
       content: '';
       position: fixed;
@@ -83,7 +81,7 @@
       top: 20px;
       right: 20px;
       display: flex;
-      gap: 10px;
+      cursor: pointer;
       z-index: 2;
     }
     .logo-corner img {
@@ -94,18 +92,7 @@
       transition: all 0.5s;
     }
 
-    /* Logo2 color overlay */
-    #logo2 {
-      filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-    }
-    body.dark-mode #logo2 {
-      filter: brightness(100%) invert(100%);
-    }
-    body.light-mode #logo2 {
-      filter: brightness(0) invert(25%) sepia(88%) saturate(454%) hue-rotate(80deg) brightness(50%) contrast(90%);
-    }
-
-    /* === Headings with gradient glow === */
+    /* === Headings with Gradient Glow === */
     h1 {
       text-align: center;
       font-size: 2.4em;
@@ -153,12 +140,10 @@
 </head>
 <body class="light-mode">
 
-  <!-- Container -->
   <div class="container">
     <!-- Logo Corner -->
-    <div class="logo-corner">
-      <img src="logo.png" alt="Logo 1">
-      
+    <div class="logo-corner" id="theme-toggle">
+      <img src="logo.png" alt="Logo">
     </div>
 
     <h1>Privacy Policy for Msika Wanjala</h1>
@@ -240,16 +225,16 @@
 
   <script>
     // Dark/light mode based on system preference
+    const body = document.body;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if(prefersDark) document.body.classList.replace('light-mode','dark-mode');
+    if(prefersDark) body.classList.replace('light-mode','dark-mode');
 
-    // Click logos to toggle theme
-    const container = document.body;
-    const logos = document.querySelectorAll('#app-logo, #logo2');
-    logos.forEach(l => l.addEventListener('click', () => {
-      container.classList.toggle('dark-mode');
-      container.classList.toggle('light-mode');
-    }));
+    // Click logo to toggle theme
+    const logo = document.querySelector('.logo-corner img');
+    logo.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      body.classList.toggle('light-mode');
+    });
   </script>
 </body>
 </html>
